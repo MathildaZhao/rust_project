@@ -86,7 +86,7 @@ impl<T: Ord + Copy> AVLNode<T> {
         new_right_tree.as_ref().borrow_mut().left = left_right_node;
         // C is the left one
         //         D
-        //        / \
+        //        /
         //       C
         new_right_tree.as_ref().borrow_mut().right = right_node;
         // E is the right one
@@ -144,7 +144,7 @@ impl<T: Ord + Copy> AVLNode<T> {
         new_left_tree.as_ref().borrow_mut().right = right_left_node;
         // C is the right one
         //         B
-        //        / \
+        //          \
         //           C
         new_left_tree.as_ref().borrow_mut().left = left_node;
         // A is the left one
