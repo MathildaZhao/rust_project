@@ -12,5 +12,8 @@ fn main() {
     println!("Is the searched value exist? The answer is {:?}.",TestNode.search(11));
     println!("Height is: {}", TestNode.height());
     println!("If the tree is empty? The answer is {}.", TestNode.is_empty());
-    println!("{:?}",TestNode.get_nodes_in_order());
+    println!("Here is the in-order traversal of the tree: {:?}",TestNode.in_order_traversal());
+    println!("Here is the pre-order traversal of the tree: {:?}",TestNode.pre_order_traversal());
+    println!("Here is the post-order traversal of the tree: {:?}",TestNode.post_order_traversal());
+
 }

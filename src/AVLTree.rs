@@ -320,18 +320,81 @@ impl AVLTree {
         self.root.is_none()
     }
 
-    pub fn get_nodes_in_order(&self) -> Vec<u32> {
+    fn in_order_get(&self, node: &Option<Rc<RefCell<AVLNode<u32>>>>, vec: &mut Vec<u32>) {
+        if let Some(current_node) = node {
+            self.in_order_get(&current_node.borrow_mut().left, vec);
+            vec.push(current_node.borrow().key);
+            self.in_order_get(&current_node.borrow_mut().right, vec);
+        }
+    }
+
+    // in order traversal example
+    //        A
+    //       / \
+    //      B   C
+    //    /    / \
+    //   D    E   F
+    //  / \    \
+    // G   H    I
+    // the root is in the middle, from left to right
+    // the left child is always in front of the root
+    // the root is always in front of the right child
+    //So in this example, after in order traversal, the result is G-D-H-B-A-E-I-C-F
+    pub fn in_order_traversal(&self) -> Vec<u32> {
         let mut vec = Vec::new();
-        self.recursive_peek(&self.root, &mut vec);
+        self.in_order_get(&self.root, &mut vec);
         vec
     }
 
-    fn recursive_peek(&self, node: &Option<Rc<RefCell<AVLNode<u32>>>>, vec: &mut Vec<u32>) {
+    fn pre_order_get(&self, node: &Option<Rc<RefCell<AVLNode<u32>>>>, vec: &mut Vec<u32>) {
         if let Some(current_node) = node {
-            self.recursive_peek(&current_node.borrow_mut().left, vec);
-            // let curr = current_node.clone();
             vec.push(current_node.borrow().key);
-            self.recursive_peek(&current_node.borrow_mut().right, vec);
+            self.pre_order_get(&current_node.borrow_mut().left, vec);
+            self.pre_order_get(&current_node.borrow_mut().right, vec);
         }
+    }
+
+    // pre order traversal example
+    //        A
+    //       / \
+    //      B   C
+    //    /    / \
+    //   D    E   F
+    //  / \    \
+    // G   H    I
+    // the roots are in front, from left to right,
+    // the roots of a tree are always in front of the left child
+    // the left child always in front of the right child
+    // So in this example, after pre order traversal, the result is A-B-D-G-H-C-E-I-F
+    pub fn pre_order_traversal(&self) -> Vec<u32> {
+        let mut vec = Vec::new();
+        self.pre_order_get(&self.root, &mut vec);
+        vec
+    }
+
+    fn post_order_get(&self, node: &Option<Rc<RefCell<AVLNode<u32>>>>, vec: &mut Vec<u32>) {
+        if let Some(current_node) = node {
+            self.post_order_get(&current_node.borrow_mut().left, vec);
+            self.post_order_get(&current_node.borrow_mut().right, vec);
+            vec.push(current_node.borrow().key);
+        }
+    }
+
+    // post order traversal example
+    //        A
+    //       / \
+    //      B   C
+    //    /    / \
+    //   D    E   F
+    //  / \    \
+    // G   H    I
+    // the root is the last, from left to right,
+    // the left child is always in front of the right child
+    // the right child is always in front of the root
+    // So in this example, after pre order traversal, the result is G-H-D-B-I-E-F-C-A
+    pub fn post_order_traversal(&self) -> Vec<u32> {
+        let mut vec = Vec::new();
+        self.post_order_get(&self.root, &mut vec);
+        vec
     }
 }
