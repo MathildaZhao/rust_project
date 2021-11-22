@@ -4,8 +4,6 @@ use std::{
     cmp::{max, Ordering},
     mem::{replace, swap},
 };
-use std::borrow::{Borrow, BorrowMut};
-use std::ops::Deref;
 
 // use rand::seq::SliceRandom;
 // use rand::{thread_rng, Rng};
@@ -311,44 +309,40 @@ impl AVLTree {
         }
     }
 
-    // does not work below. some bugs
-    // pub fn get_num_leaves(&self) -> u32 {
-    //     let mut count: u32 = 0;
-    //     let root_node = &self.root.unwrap();
-    //     // if let Some(root_node) = &self.root {
-    //     //     count = r_get_num_leaves(&root_node, count)
-    //     // } else {
-    //     //     return count;
-    //     // }
-    //     let node = root_node.as_ref().borrow_mut();
-    //
-    //     if let Some(node) = &node.left {
-    //         count =
-    //     }
-    //
-    //     fn r_get_num_leaves(node: &Rc<RefCell<AVLNode<u32>>>, mut current_count: u32) -> u32 {
-    //         let node = node.as_ref().borrow_mut();
-    //         if let Some(left_node) = &node.left {
-    //             current_count = r_get_num_leaves(left_node, current_count);
-    //         }
-    //         if let Some(right_node) = &node.right {
-    //             current_count = r_get_num_leaves(right_node, current_count);
-    //         }
-    //         if node.left.is_none() && node.right.is_none() {
-    //             current_count = current_count + 1;
-    //         }
-    //         current_count
-    //     }
-    //     count
-    // }
-
     pub fn height(&self) -> i32 {
         match &self.root {
             Some(node) => node.as_ref().borrow_mut().height(),
             None => 0i32,
         }
     }
+
     pub fn is_empty(&self) -> bool {
         self.root.is_none()
     }
+
+    pub fn get_nodes_in_order(&self) -> Vec<u32> {
+        let mut vec = Vec::new();
+        self.recursive_peek(&self.root, &mut vec);
+        vec
+    }
+
+    fn recursive_peek(&self, node: &Option<Rc<RefCell<AVLNode<u32>>>>, vec: &mut Vec<u32>) {
+        if let Some(current_node) = node {
+            self.recursive_peek(&current_node.borrow_mut().left, vec);
+            // let curr = current_node.clone();
+            vec.push(current_node.borrow().key);
+            self.recursive_peek(&current_node.borrow_mut().right, vec);
+        }
+    }
+
+    pub fn print_nodes_in_order(&self) {
+        if let Some(_root_node) = &self.root {
+            let mut nodes: Vec<u32> = Vec::new();
+            self.recursive_peek(&self.root, &mut nodes);
+            println!("{:?}", nodes)
+        } else {
+            println!("Nothing in tree.");
+        }
+    }
+
 }
