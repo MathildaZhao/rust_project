@@ -200,21 +200,6 @@ impl<T: Ord + Copy> AVLNode<T> {
         }
         false
     }
-
-    //does not work below
-    // pub fn count_leave(&self) -> u32 {
-    //     let mut count = 0;
-    //     if let Some(node) = &self.left {
-    //         count = node.as_ref().borrow_mut().count_leave();
-    //     }
-    //     if let Some(node) = &self.right {
-    //         count = node.as_ref().borrow_mut().count_leave();
-    //     }
-    //     if self.left.is_none()&&self.right.is_none() {
-    //         count += 1;
-    //     }
-    //     count
-    // }
 }
 
 #[derive(Clone, Debug, PartialEq)]
@@ -328,19 +313,19 @@ impl AVLTree {
         }
     }
 
-    // in order traversal example
-    //        A
-    //       / \
-    //      B   C
-    //    /    / \
-    //   D    E   F
-    //  / \    \
-    // G   H    I
-    // the root is in the middle, from left to right
-    // the left child is always in front of the root
-    // the root is always in front of the right child
-    //So in this example, after in order traversal, the result is G-D-H-B-A-E-I-C-F
     pub fn in_order_traversal(&self) -> Vec<u32> {
+        // in order traversal example
+        //        A
+        //       / \
+        //      B   C
+        //    /    / \
+        //   D    E   F
+        //  / \    \
+        // G   H    I
+        // the root is in the middle, from left to right
+        // the left child is always in front of the root
+        // the root is always in front of the right child
+        //So in this example, after in order traversal, the result is G-D-H-B-A-E-I-C-F
         let mut vec = Vec::new();
         self.in_order_get(&self.root, &mut vec);
         vec
@@ -354,19 +339,19 @@ impl AVLTree {
         }
     }
 
-    // pre order traversal example
-    //        A
-    //       / \
-    //      B   C
-    //    /    / \
-    //   D    E   F
-    //  / \    \
-    // G   H    I
-    // the roots are in front, from left to right,
-    // the roots of a tree are always in front of the left child
-    // the left child always in front of the right child
-    // So in this example, after pre order traversal, the result is A-B-D-G-H-C-E-I-F
     pub fn pre_order_traversal(&self) -> Vec<u32> {
+        // pre order traversal example
+        //        A
+        //       / \
+        //      B   C
+        //    /    / \
+        //   D    E   F
+        //  / \    \
+        // G   H    I
+        // the roots are in front, from left to right,
+        // the roots of a tree are always in front of the left child
+        // the left child always in front of the right child
+        // So in this example, after pre order traversal, the result is A-B-D-G-H-C-E-I-F
         let mut vec = Vec::new();
         self.pre_order_get(&self.root, &mut vec);
         vec
@@ -380,19 +365,19 @@ impl AVLTree {
         }
     }
 
-    // post order traversal example
-    //        A
-    //       / \
-    //      B   C
-    //    /    / \
-    //   D    E   F
-    //  / \    \
-    // G   H    I
-    // the root is the last, from left to right,
-    // the left child is always in front of the right child
-    // the right child is always in front of the root
-    // So in this example, after pre order traversal, the result is G-H-D-B-I-E-F-C-A
     pub fn post_order_traversal(&self) -> Vec<u32> {
+        // post order traversal example
+        //        A
+        //       / \
+        //      B   C
+        //    /    / \
+        //   D    E   F
+        //  / \    \
+        // G   H    I
+        // the root is the last, from left to right,
+        // the left child is always in front of the right child
+        // the right child is always in front of the root
+        // So in this example, after pre order traversal, the result is G-H-D-B-I-E-F-C-A
         let mut vec = Vec::new();
         self.post_order_get(&self.root, &mut vec);
         vec

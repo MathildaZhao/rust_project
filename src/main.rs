@@ -15,5 +15,6 @@ fn main() {
     println!("Here is the in-order traversal of the tree: {:?}",TestNode.in_order_traversal());
     println!("Here is the pre-order traversal of the tree: {:?}",TestNode.pre_order_traversal());
     println!("Here is the post-order traversal of the tree: {:?}",TestNode.post_order_traversal());
+    println!("{:?}",TestNode.)
 
 }
