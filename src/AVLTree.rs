@@ -334,15 +334,4 @@ impl AVLTree {
             self.recursive_peek(&current_node.borrow_mut().right, vec);
         }
     }
-
-    pub fn print_nodes_in_order(&self) {
-        if let Some(_root_node) = &self.root {
-            let mut nodes: Vec<u32> = Vec::new();
-            self.recursive_peek(&self.root, &mut nodes);
-            println!("{:?}", nodes)
-        } else {
-            println!("Nothing in tree.");
-        }
-    }
-
 }
