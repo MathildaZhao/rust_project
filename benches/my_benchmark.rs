@@ -13,7 +13,13 @@ fn test_avl(tree_size: i32) {
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
-    c.bench_function("AVL TREE", |b| b.iter(|| test_avl(black_box(10000))));
+    //test bench
+    // c.bench_function("AVL TREE", |b| b.iter(|| test_avl(black_box(10000))));
+    for tree_size in [10000, 40000, 70000, 100000, 130000].iter() {
+        c.bench_function("AVL TREE", |b| {
+            b.iter(|| test_avl(black_box(*tree_size)))
+        });
+    }
 }
 
 criterion_group!(benches, criterion_benchmark);
