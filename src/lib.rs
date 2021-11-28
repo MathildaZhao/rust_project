@@ -1,1 +1,1 @@
-pub mod AVLTree;
+pub mod avl_tree;

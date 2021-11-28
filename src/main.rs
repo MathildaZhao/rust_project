@@ -1,19 +1,27 @@
-use std::borrow::BorrowMut;
+use crate::avl_tree::Avl;
 
-mod AVLTree;
-
+mod avl_tree;
 fn main() {
-    let mut TestNode = AVLTree::AVLTree::new();
-    for i in vec![3,5,6,8,2] {
-        TestNode.insert(i);
-    }
-    println!("{:#?}",TestNode);
-    println!("Is the searched value exist? The answer is {:?}.",TestNode.search(5));
-    println!("Is the searched value exist? The answer is {:?}.",TestNode.search(11));
-    println!("Height is: {}", TestNode.height());
-    println!("If the tree is empty? The answer is {}.", TestNode.is_empty());
-    println!("Here is the in-order traversal of the tree: {:?}",TestNode.in_order_traversal());
-    println!("Here is the pre-order traversal of the tree: {:?}",TestNode.pre_order_traversal());
-    println!("Here is the post-order traversal of the tree: {:?}",TestNode.post_order_traversal());
+    let mut node = avl_tree::Node::generate_new_node(7);
+    for i in vec![6,2,1,8,9,3] {
+        node.insert_node(i)
+    };
+    println!("Leaves: {}", node.count_leaves());
+    println!("Height: {}", node.get_tree_height());
+    println!("Inorder: {:?}", node.get_inorder());
+    println!("Empty? {}", node.is_empty());
+    node.pretty_print();
 
+    for i in vec![2,8,0,12,9,3] {
+        println!("Does {} exist? {}", i, node.is_exist(i));
+    }
+
+    node.delete_node(2);
+    node.delete_node(8);
+    node.delete_node(3);
+    println!("Inorder: {:?}", node.get_inorder());
+    node.pretty_print();
+    println!("Leaves: {}", node.count_leaves());
+    println!("Height: {}", node.get_tree_height());
+    println!("Empty? {}", node.is_empty());
 }
