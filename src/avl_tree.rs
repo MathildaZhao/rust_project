@@ -36,6 +36,12 @@ pub trait Avl<T: PartialOrd + Copy + Debug> {
     fn inorder(&self, vec: &mut Vec<T>);
     fn get_inorder(&self) -> Vec<T>;
     // 中序遍历
+    fn preorder(&self, vec: &mut Vec<T>);
+    fn get_preorder(&self) -> Vec<T>;
+    // 前序遍历
+    fn postorder(&self, vec: &mut Vec<T>);
+    fn get_postorder(&self) -> Vec<T>;
+    // 终序遍历
     fn count_leaves(&self) -> i32;
     // 找叶子数量
     fn is_empty(&self) -> bool;
@@ -209,6 +215,18 @@ impl<T: PartialOrd + Copy + Debug> Avl<T> for Node<T> {
     }
 
     fn right_rotate(&mut self) {
+        // An example
+        //         D
+        //        / \
+        //       B   E
+        //      / \
+        //     A   C
+        // after rotation, the
+        //       B
+        //      / \
+        //     A   D
+        //        / \
+        //       C   E
         match self {
             None => unreachable!(),
             Some(root) => {
@@ -228,6 +246,18 @@ impl<T: PartialOrd + Copy + Debug> Avl<T> for Node<T> {
     }
 
     fn left_rotate(&mut self) {
+        // An example
+        //       B
+        //      / \
+        //     A   D
+        //        / \
+        //       C   E
+        // After rotation, it is:
+        //         D
+        //        / \
+        //       B   E
+        //      / \
+        //     A   C
         match self {
             None => unreachable!(),
             Some(root) => {
@@ -275,8 +305,72 @@ impl<T: PartialOrd + Copy + Debug> Avl<T> for Node<T> {
     }
 
     fn get_inorder(&self) -> Vec<T> {
+        // in order traversal example
+        //        A
+        //       / \
+        //      B   C
+        //    /    / \
+        //   D    E   F
+        //  / \    \
+        // G   H    I
+        // the root is in the middle, from left to right
+        // the left child is always in front of the root
+        // the root is always in front of the right child
+        //So in this example, after in order traversal, the result is G-D-H-B-A-E-I-C-F
         let mut res = Vec::new();
         self.inorder(&mut res);
+        res
+    }
+
+    fn preorder(&self, vec: &mut Vec<T>) {
+        if let Some(node) = self {
+            vec.push(node.borrow_mut().value);
+            node.borrow_mut().left.inorder(vec);
+            node.borrow_mut().right.inorder(vec);
+        }
+    }
+
+    fn get_preorder(&self) -> Vec<T> {
+        // pre order traversal example
+        //        A
+        //       / \
+        //      B   C
+        //    /    / \
+        //   D    E   F
+        //  / \    \
+        // G   H    I
+        // the roots are in front, from left to right,
+        // the roots of a tree are always in front of the left child
+        // the left child always in front of the right child
+        // So in this example, after pre order traversal, the result is A-B-D-G-H-C-E-I-F
+        let mut res = Vec::new();
+        self.preorder(&mut res);
+        res
+        }
+
+    fn postorder(&self, vec: &mut Vec<T>) {
+        if let Some(node) = self {
+            node.borrow_mut().left.inorder(vec);
+            node.borrow_mut().right.inorder(vec);
+            vec.push(node.borrow_mut().value);
+        }
+    }
+
+    fn get_postorder(&self) -> Vec<T> {
+        // post order traversal example
+        //        A
+        //       / \
+        //      B   C
+        //    /    / \
+        //   D    E   F
+        //  / \    \
+        // G   H    I
+        // the root is the last, from left to right,
+        // the left child is always in front of the right child
+        // the right child is always in front of the root
+        // So in this example, after pre order traversal, the result is G-H-D-B-I-E-F-C-A
+        let mut res = Vec::new();
+        self.postorder(&mut res);
         res
     }
 

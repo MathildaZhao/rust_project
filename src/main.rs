@@ -9,6 +9,8 @@ fn main() {
     println!("Leaves: {}", node.count_leaves());
     println!("Height: {}", node.get_tree_height());
     println!("Inorder: {:?}", node.get_inorder());
+    println!("Preorder: {:?}", node.get_preorder());
+    println!("Postorder: {:?}", node.get_postorder());
     println!("Empty? {}", node.is_empty());
     node.pretty_print();
 
