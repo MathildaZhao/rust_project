@@ -2,6 +2,7 @@ use crate::avl_tree::{Avl, Node};
 use std::{io, env, process};
 
 mod avl_tree;
+mod BST;
 
 //the following is the AVL test part
 // fn main() {
