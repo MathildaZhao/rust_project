@@ -3,6 +3,7 @@ use std::{io, env, process};
 
 mod avl_tree;
 
+//the following is the AVL test part
 // fn main() {
 //     let mut node = avl_tree::Node::generate_new_node(7);
 //     for i in vec![6,2,1,8,9,3] {
@@ -46,21 +47,10 @@ pub fn AVL_choices() {
     println!("---------------------------------------------")
 }
 
-// pub fn get_user_input() -> i32 {
-//     let mut input = String::new();
-//     std::io::stdin().read_line(&mut input).expect("Wrong input!");
-//     match input.trim().parse() {
-//         Ok(num) => {
-//             num
-//         }
-//         Err(_) => 0
-//         }
-//     }
-
 fn main() {
     let args: Vec<String> = env::args().collect();
     let length = args.len();
-    if length < 2{
+    if length < 2 {
         println!("If you want to use the AVL Tree, please type cargo run AVLTree");
         println!("If you want to use the RB Tree, please type cargo run RBTree");
     } else {
@@ -77,21 +67,21 @@ fn main() {
                         AVL_choices();
                         let mut user_choice = String::new();
                         io::stdin().read_line(&mut user_choice).expect("Failed to read line!");
-                        let user_choice : i32= user_choice.trim().parse().expect("Wrong!");
+                        let user_choice: i32 = user_choice.trim().parse().expect("Wrong!");
 
                         match user_choice {
                             1 => {
                                 println!("please input the value you want to insert: ");
                                 let mut insert_input = String::new();
                                 io::stdin().read_line(&mut insert_input).expect("Failed to read line!");
-                                let insert_input : i32= insert_input.trim().parse().expect("Wrong!");
+                                let insert_input: i32 = insert_input.trim().parse().expect("Wrong!");
                                 root.insert_node(insert_input);
                             }
                             2 => {
                                 println!("please input the value you want to delete: ");
                                 let mut delete_input = String::new();
                                 io::stdin().read_line(&mut delete_input).expect("Failed to read line!");
-                                let delete_input : i32= delete_input.trim().parse().expect("Wrong!");
+                                let delete_input: i32 = delete_input.trim().parse().expect("Wrong!");
                                 root.delete_node(delete_input);
                             }
                             3 => {
@@ -102,32 +92,32 @@ fn main() {
                                 let mut height_result = root.get_tree_height();
                                 println!("Tree height: {:?}", height_result);
                             }
-                            5=>{
+                            5 => {
                                 let mut in_order = root.get_inorder();
                                 println!("In-order traversal: {:?}", in_order);
                             }
-                            6=>{
+                            6 => {
                                 let mut pre_order = root.get_preorder();
                                 println!("Pre-order traversal: {:?}", pre_order);
                             }
-                            7=>{
+                            7 => {
                                 let mut post_order = root.get_postorder();
                                 println!("Post-order traversal: {:?}", post_order);
                             }
-                            8=>{
-                                println!("Is the tree empty? {:?}",root.is_empty());
+                            8 => {
+                                println!("Is the tree empty? {:?}", root.is_empty());
                             }
-                            9 =>{
+                            9 => {
                                 println!("please input the value you want to search: ");
                                 let mut search_input = String::new();
                                 io::stdin().read_line(&mut search_input).expect("Failed to read line!");
-                                let search_input : i32= search_input.trim().parse().expect("Wrong!");
-                                println!("Is the value exist? {:?}",root.is_exist(search_input));
+                                let search_input: i32 = search_input.trim().parse().expect("Wrong!");
+                                println!("Is the value exist? {:?}", root.is_exist(search_input));
                             }
-                            10=>{
+                            10 => {
                                 root.pretty_print();
                             }
-                            11=>{
+                            11 => {
                                 println!("Bye!");
                                 break;
                             }

@@ -346,7 +346,7 @@ impl<T: PartialOrd + Copy + Debug> Avl<T> for Node<T> {
         let mut res = Vec::new();
         self.preorder(&mut res);
         res
-        }
+    }
 
     fn postorder(&self, vec: &mut Vec<T>) {
         if let Some(node) = self {
@@ -417,8 +417,13 @@ impl<T: PartialOrd + Copy + Debug> Avl<T> for Node<T> {
     }
 
     fn pretty_print(&self) {
-        let prefix = String::from("->");
-        self.print(&prefix);
+        match self {
+            None => println!("Tree is empty!"),
+            Some(_) => {
+                let prefix = String::from("->");
+                self.print(&prefix);
+            }
+        }
     }
 
     fn is_exist(&self, val: T) -> bool {
