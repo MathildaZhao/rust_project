@@ -4,33 +4,6 @@ use std::{io, env, process};
 mod avl_tree;
 mod BST;
 
-//the following is the AVL test part
-// fn main() {
-//     let mut node = avl_tree::Node::generate_new_node(7);
-//     for i in vec![6,2,1,8,9,3] {
-//         node.insert_node(i)
-//     };
-//     println!("Leaves: {}", node.count_leaves());
-//     println!("Height: {}", node.get_tree_height());
-//     println!("Inorder: {:?}", node.get_inorder());
-//     println!("Preorder: {:?}", node.get_preorder());
-//     println!("Postorder: {:?}", node.get_postorder());
-//     println!("Empty? {}", node.is_empty());
-//     node.pretty_print();
-//
-//     for i in vec![2,8,0,12,9,3] {
-//         println!("Does {} exist? {}", i, node.is_exist(i));
-//     }
-//
-//     node.delete_node(2);
-//     node.delete_node(8);
-//     node.delete_node(3);
-//     println!("Inorder: {:?}", node.get_inorder());
-//     node.pretty_print();
-//     println!("Leaves: {}", node.count_leaves());
-//     println!("Height: {}", node.get_tree_height());
-//     println!("Empty? {}", node.is_empty());
-// }
 pub fn AVL_choices() {
     println!("---------------------------------------------");
     println!("Please choose the operation you want: (input corresponding number)");
@@ -139,3 +112,34 @@ fn main() {
         }
     }
 }
+
+
+
+
+//the following is the AVL test part
+// fn main() {
+//     let mut node = avl_tree::Node::generate_new_node(7);
+//     for i in vec![6,2,1,8,9,3] {
+//         node.insert_node(i)
+//     };
+//     println!("Leaves: {}", node.count_leaves());
+//     println!("Height: {}", node.get_tree_height());
+//     println!("Inorder: {:?}", node.get_inorder());
+//     println!("Preorder: {:?}", node.get_preorder());
+//     println!("Postorder: {:?}", node.get_postorder());
+//     println!("Empty? {}", node.is_empty());
+//     node.pretty_print();
+//
+//     for i in vec![2,8,0,12,9,3] {
+//         println!("Does {} exist? {}", i, node.is_exist(i));
+//     }
+//
+//     node.delete_node(2);
+//     node.delete_node(8);
+//     node.delete_node(3);
+//     println!("Inorder: {:?}", node.get_inorder());
+//     node.pretty_print();
+//     println!("Leaves: {}", node.count_leaves());
+//     println!("Height: {}", node.get_tree_height());
+//     println!("Empty? {}", node.is_empty());
+// }

@@ -41,7 +41,7 @@ pub trait Avl<T: PartialOrd + Copy + Debug> {
     // 前序遍历
     fn postorder(&self, vec: &mut Vec<T>);
     fn get_postorder(&self) -> Vec<T>;
-    // 终序遍历
+    // 后序遍历
     fn count_leaves(&self) -> i32;
     // 找叶子数量
     fn is_empty(&self) -> bool;
